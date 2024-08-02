@@ -34,7 +34,7 @@ body, html {
 }
 
 #WebLogo{
-    width: 35%;
+    width: 40%;
     margin-bottom: 5%;
 }
 
@@ -43,7 +43,7 @@ body, html {
 }
 
 .usp p{
-    margin: 1%;
+    margin: 0.5%;
 }
 
 .mainHeading {
@@ -55,9 +55,23 @@ body, html {
     color: grey;
 }
 
+#leftSide{
+    width: 50%;
+}
+
 #rightSide {
     width: 30%;
     background-color: rgb(0, 0, 0);
+}
+
+#mainContainer{
+    margin: auto;
+    position: absolute;
+    top: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .Submit {
@@ -67,6 +81,7 @@ body, html {
     color: white;
     border: none;
     border-radius: 5px;
+    width: 100%;
 }
 
 .Submit:hover {
@@ -76,6 +91,7 @@ body, html {
 input {
     padding: 5px;
     background-color: black;
+    width: 100%;
 }
 
 .LogIn {
@@ -103,6 +119,7 @@ input {
 .LogInForm h2 {
     text-align: left;
     color: rgb(250, 126, 17);
+    margin-top: 0%;
 }
 
 .Email input:focus,
@@ -111,16 +128,7 @@ input {
     color: grey;
 }
 
-#mainContainer{
-    position: absolute;
-    top: 0%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+#loginForm {
+    margin: 5% 5% 5%;
+    padding: 15%;
 }
-
-#leftSide{
-    width: 50%;
-}
-
