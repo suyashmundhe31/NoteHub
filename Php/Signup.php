@@ -1,3 +1,18 @@
+<?php
+ 
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $Cpassword = $_POST["confirmpassword"];
+    require "../Components/DbConnect.php";
+
+    if ($password == $Cpassword) {
+        
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
