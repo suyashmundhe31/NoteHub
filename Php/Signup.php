@@ -1,13 +1,29 @@
 <?php
  
+$displayAlert = false;
+$displayError = false;
 if($_SERVER['REQUEST_METHOD']=='POST'){
+    require "../Components/DbConnect.php";
     $email = $_POST["email"];
     $password = $_POST["password"];
     $Cpassword = $_POST["confirmpassword"];
-    require "../Components/DbConnect.php";
 
-    if ($password == $Cpassword) {
-        
+    $existsql = "SELECT * FROM `users` WHERE email = '$email'";
+    $existquery = mysqli_query($conn , $existquery);
+    $existcount = mysqli_num_rows($existcount);
+    if($existcount > 0){
+        $$displayError = " Username already exists." ;
+    }else{ 
+        if ($password == $Cpassword) {
+            $hash = password_hash($password , PASSWORD_DEFAULT);
+            $insertuser = "INSERT INTO `users` (`username` , `password` , `date`) VALUES ('$username' , '$hash' , current_timestamp()" ;
+            $insert = mysqli_query($conn, $insertuser);
+            if($insert){
+                $displayAlert = " Your account has been created and you and now login.";
+            }else{
+                $$displayError = " Password does not match.";
+            }
+        }
     }
 }
 
@@ -23,9 +39,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 </head>
 <body>
     <div class="background-cover"></div>
+    <?php
+        if($displayAlert){
+            echo '  <div id="displayAlert">
+                        <strong>Success!</strong>'.$displayAlert.'
+                    </div>' ;
+        }else if($displayError){
+            echo '  <div id="displayAlert">
+                        <strong>Error!</strong>'.$displayError.'
+                    </div>' ;
+        }
+    ?>
     <main>
         <section id="mainContainer">
-            <form action="Signup" id="signupForm">
+            <form action="Signup.php" id="signupForm">
                     <h2>Signup</h2>
                     <div class="Email">
                         <p>Email : <br>
@@ -37,7 +64,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     </div>
                     <div class="Password">
                         <p>Confirm Password : <br>
-                        <input type="confirmpassword" name="confirmPassword" id="Password" placeholder="Confirm Password" required>
+                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
                     </div>
                     <div class="Signup">
                         <button type="submit" class="Submit">Signup</button>
@@ -45,6 +72,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             </form>
         </section>
     </main>
-    <script src=""></script>
+    <script src="../Js/Signup.js"></script>
 </body>
 </html>

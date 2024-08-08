@@ -1,9 +1,29 @@
 <?php 
+$displayAlert = false;
+$displayError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    require "../Components/DbConnect.php";
     $email = $_POST["email"];
     $password = $_POST["password"];
-    require "../Components/DbConnect.php";
-    
+     
+    $searchsql = "SELECT * FROM users WHERE email = '$email' " ;
+    $searchquery = mysqli_query($conn , $searchsql);
+    $searchcount = mysqli_num_rows($searchquery);
+    if($searchcount == 1){
+        while($row = mysqli_fetch_assoc($searchquery)){
+        if (password_verify($password,$row['password'])) {
+            $displayAlert = " You are logged in.";
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email ;   
+            header('location : Home.php');
+        }else{
+            $displayError = " Invalid Creadentials.";
+        }
+        }
+    }else{
+        $displayError = " Invalid Creadentials.";
+    }
 }
 ?>
 
@@ -14,11 +34,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../Css/Login.css">
+    <link rel="stylesheet" href="../Css/Index.css">
 </head>
 
 <body>
     <div class="background-cover"></div>
+    <?php
+        if($displayAlert){
+            echo '  <div id="displayAlert">
+                        <strong>Success!</strong>'.$displayAlert.'
+                    </div>' ;
+        }else if($displayError){
+            echo '  <div id="displayAlert">
+                        <strong>Error!</strong>'.$displayError.'
+                    </div>' ;
+        }
+    ?>
     <main>
         <section id="mainContainer">
             <section id="leftSide">
@@ -39,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </section>
             <section id="rightSide">
-                <form action="Login.php" id="loginForm" method="post">
+                <form action="Index.php" id="loginForm" method="post">
                     <div class="LogInForm">
                         <h2>LogIn</h2>
                         <div class="Email">
@@ -64,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </section>
         </section>
     </main>
-    <script src=""></script>
+    <script src="../Js/Index.js"></script>
 </body>
 
 </html>
