@@ -2,7 +2,7 @@
     $servername = "Localhost";
     $username = "root";
     $password = "";
-    $database = "Notehub_users";
+    $database = "notehub";
 
     $conn = mysqli_connect($servername, $username, $password , $database);
     if (!$conn) {
