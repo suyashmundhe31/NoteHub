@@ -2,26 +2,26 @@
  
 $displayAlert = false;
 $displayError = false;
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if($_SERVER['REQUEST_METHOD'] =='POST'){
     require "../Components/DbConnect.php";
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $Cpassword = $_POST["confirmpassword"];
+    $email = $_POST["Email"];
+    $password = $_POST["Password"];
+    $Cpassword = $_POST["confirmPassword"];
 
     $existsql = "SELECT * FROM `users` WHERE email = '$email'";
-    $existquery = mysqli_query($conn , $existquery);
-    $existcount = mysqli_num_rows($existcount);
+    $existquery = mysqli_query($conn , $existsql);
+    $existcount = mysqli_num_rows($existquery);
     if($existcount > 0){
         $$displayError = " Username already exists." ;
     }else{ 
         if ($password == $Cpassword) {
             $hash = password_hash($password , PASSWORD_DEFAULT);
-            $insertuser = "INSERT INTO `users` (`username` , `password` , `date`) VALUES ('$username' , '$hash' , current_timestamp()" ;
+            $insertuser = "INSERT INTO `users` (`email` , `password` , `datetime`) VALUES ('$email' , '$hash' , current_timestamp())" ;
             $insert = mysqli_query($conn, $insertuser);
             if($insert){
                 $displayAlert = " Your account has been created and you and now login.";
             }else{
-                $$displayError = " Password does not match.";
+                $displayError = " Password does not match.";
             }
         }
     }
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     ?>
     <main>
         <section id="mainContainer">
-            <form action="Signup.php" id="signupForm">
+            <form action="Signup.php" id="signupForm" method="post">
                     <h2>Signup</h2>
                     <div class="Email">
                         <p>Email : <br>

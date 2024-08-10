@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </section>
         </section>
     </main>
-    <script src="../Js/Index.js"></script>
+    <!-- <script src="../Js/Index.js"></script> -->
 </body>
 
 </html>
