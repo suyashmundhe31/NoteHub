@@ -12,10 +12,10 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
     $existquery = mysqli_query($conn , $existsql);
     $existcount = mysqli_num_rows($existquery);
     if($existcount > 0){
-        $$displayError = " Username already exists." ;
+        $displayError = " Username already exists." ;
     }else{ 
         if ($password == $Cpassword) {
-            $hash = password_hash($password , PASSWORD_DEFAULT);
+            $hash = password_hash($password, PASSWORD_DEFAULT);
             $insertuser = "INSERT INTO `users` (`email` , `password` , `datetime`) VALUES ('$email' , '$hash' , current_timestamp())" ;
             $insert = mysqli_query($conn, $insertuser);
             if($insert){
@@ -38,8 +38,7 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
     <link rel="stylesheet" href="../Css/Signup.css">
 </head>
 <body>
-    <div class="background-cover"></div>
-    <?php
+<?php
         if($displayAlert){
             echo '  <div id="displayAlert">
                         <strong>Success!</strong>'.$displayAlert.'
@@ -49,7 +48,8 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
                         <strong>Error!</strong>'.$displayError.'
                     </div>' ;
         }
-    ?>
+?>
+    <div class="background-cover"></div>
     <main>
         <section id="mainContainer">
             <form action="Signup.php" id="signupForm" method="post">
@@ -72,6 +72,6 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
             </form>
         </section>
     </main>
-    <script src="../Js/Signup.js"></script>
+    <!-- <script src="../Js/Signup.js"></script> -->
 </body>
 </html>
