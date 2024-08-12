@@ -1,28 +1,30 @@
 <?php 
 $displayAlert = false;
 $displayError = false;
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     require "../Components/DbConnect.php";
     $email = $_POST["email"];
-    $password = $_POST["password"];
-     
-    $searchsql = "SELECT * FROM users WHERE email = '$email' " ;
-    $searchquery = mysqli_query($conn , $searchsql);
+    $pass = $_POST["pass"];
+    
+    $searchsql = "SELECT * FROM `users` WHERE email = '$email'";
+    $searchquery = mysqli_query($conn, $searchsql);
     $searchcount = mysqli_num_rows($searchquery);
     if($searchcount == 1){
         while($row = mysqli_fetch_assoc($searchquery)){
-        if (password_verify($password,$row['password'])) {
-            $displayAlert = " You are logged in.";
-            session_start();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['email'] = $email ;   
-            header('location : Home.php');
-        }else{
-            $displayError = " Invalid Creadentials.";
+            if (password_verify($pass , $row['password'])) {
+                $displayAlert = "You are logged in.";
+                session_start();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $email;   
+                header('Location: Home.php');
+                exit();
+            } else {
+                $displayError = "Invalid Credentials.";
+            }
         }
-        }
-    }else{
-        $displayError = " Invalid Creadentials.";
+    } else {
+        $displayError = "Invalid Credentials.";
     }
 }
 ?>
@@ -70,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </section>
             <section id="rightSide">
-                <form action="Index.php" id="loginForm" method="post">
+                <form action="Login.php" id="loginForm" method="post">
                     <div class="LogInForm">
                         <h2>LogIn</h2>
                         <div class="Email">
@@ -80,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="Password">
                             <p>Password: <br>
-                                <input type="password" name="password" id="Password" placeholder="Enter Password"
+                                <input type="password" name="pass" id="Password" placeholder="Enter Password"
                                     required>
                         </div>
                         <div class="LogIn">
