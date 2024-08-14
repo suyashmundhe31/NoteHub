@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </section>
             <section id="rightSide">
-                <form action="Login.php" id="loginForm" method="post">
+                <form action="Login.php" id="loginForm" method="post" onclick=" ">
                     <div class="LogInForm">
                         <h2>LogIn</h2>
                         <div class="Email">
