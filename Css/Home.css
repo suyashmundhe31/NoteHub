@@ -1,0 +1,102 @@
+* {
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mainImg {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.bgImg {
+    width: 100%;
+    height: 100%;
+}
+
+.maincontainer {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#Title h1 {
+    font-size: 300%;
+    margin: 3% 0% 0% 3%;
+    color: rgb(250, 126, 17);
+}
+
+#Subs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.subject {
+    margin-top: -1px;
+    height: 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.subject-topline, .subject-botline { 
+    opacity: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.name-mask {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.sub-name {
+    margin-top: 0.07vw;
+    margin-bottom: -0.07vw;
+    width: 76vw;
+    text-transform: uppercase;
+    position: relative;
+    font-size: 4.1666666667vw;
+    line-height: 0.9em;
+    width: 100vw;
+    transition: font-family 0.3s ease;
+    text-align: left; 
+    padding-left: 3%; 
+}
+
+.sub-name-hover {
+    font-family: "sang-bleu", Georgia, serif;
+    position: absolute;
+    width: 76vw;
+    text-transform: uppercase;
+    line-height: 0.9em;
+    width: 100vw;
+    padding-top: 10px;
+    font-size: 3.6979166667vw;
+    transition: font-family 0.3s ease;
+    text-align: left; 
+    padding-left: 3%; 
+}
+
+/* Hover effect */
+.overview-entry:hover .subject-topline,
+.overview-entry:hover .subject-botline { 
+    opacity: 1;
+}
+
+.overview-entry:hover .sub-name {
+    font-family: "sang-bleu", Georgia, serif;
+}
