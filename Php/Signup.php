@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
     <div class="background-cover"></div>
     <main>
         <section id="mainContainer">
-            <form action="Signup.php" id="signupForm" method="post">
+            <form action="Signup.php" id="signupForm" method="post" onclick=" ">
                     <h2>Signup</h2>
                     <div class="Email">
                         <p>Email : <br>
